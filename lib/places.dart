@@ -15,3 +15,5 @@ class Places {
     return _places[_random.nextInt(_places.length)];
   }
 }
+
+final places = Places();

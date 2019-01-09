@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:what_4_lunch/place.dart';
+import 'package:what_4_lunch/places.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -20,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   _generateRandomPlace() {
-    print('Generate random place');
+    Place place = places.getRandomPlace();
+    print('Random place - ${place.name}');
   }
 }
