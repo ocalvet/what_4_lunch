@@ -7,7 +7,19 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('What4Lunch'),
       ),
-      body: Text('What Up!@'),
+      body: Container(
+        child: Center(
+          child: Text('Generate a place', style: Theme.of(context).textTheme.display1),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _generateRandomPlace,
+        child: Icon(Icons.refresh),
+      ),
     );
+  }
+
+  _generateRandomPlace() {
+    print('Generate random place');
   }
 }
