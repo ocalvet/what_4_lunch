@@ -1,10 +1,19 @@
-# what_4_lunch
+# What4Lunch
 
-A new Flutter project.
+An app to help us decide what to eat for lunch everyday. It is build with flutte.io, follow the getting started session to run the source locally.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Dependencies
+- [Flutter](https://flutter.io)
+- Running Emulator or connected phone
+
+### How to run
+
+1. Get all the packages `$ flutter packages get`
+2. Run the application `$ flutter run`
+
+## Help
 
 A few resources to get you started if this is your first Flutter project:
 
