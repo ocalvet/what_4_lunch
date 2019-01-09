@@ -6,6 +6,6 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(What4LunchApp());
     // Verify that our counter starts at 0.
-    expect(find.text('What'), findsOneWidget);
+    expect(find.text('What'), findsWidgets);
   });
 }
