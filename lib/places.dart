@@ -7,8 +7,14 @@ class Places {
     Place(name: "Shane's"),
     Place(name: 'Chipotle'),
     Place(name: 'The Habit'),
+    Place(name: 'Senor Burrito'),
+    Place(name: 'Jamaican'),
+    Place(name: 'Cuban'),
+    Place(name: "Santo's"),
     Place(name: '5 Spice'),
+    Place(name: 'Punjab'),
   ];
+  
   final _random = new Random();
 
   getRandomPlace() {
