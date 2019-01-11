@@ -13,6 +13,7 @@ class Places {
     Place(name: "Santo's"),
     Place(name: '5 Spice'),
     Place(name: 'Punjab'),
+    Place(name: 'WholeFoods'),
   ];
   
   final _random = new Random();
