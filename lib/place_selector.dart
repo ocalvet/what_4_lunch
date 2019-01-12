@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:what_4_lunch/place.dart';
 import 'package:what_4_lunch/places.dart';
+import 'package:android_intent/android_intent.dart';
+import 'package:platform/platform.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlaceSelector extends StatefulWidget {
   @override
@@ -49,13 +52,33 @@ class _PlaceSelectorState extends State<PlaceSelector> {
           iconSize: 64,
           color: Colors.green,
           icon: Icon(Icons.thumb_up),
-          onPressed: () {
+          onPressed: () async {
             final snackBar = SnackBar(
               content: Text('Yes, we are going to ${generatedPlace.name}'),
               action: SnackBarAction(
                 label: 'Map',
-                onPressed: () {
+                onPressed: () async {
                   print('One day we will open a map here with directions');
+                  String origin="901 Penninsula corp drive boca raton fl";  // lat,long like 123.34,68.56
+                  // String destination="someEndLocationStringAddress or lat,long";
+                  String destination='${generatedPlace.name}';
+                  if (LocalPlatform().isAndroid) {
+                    final AndroidIntent intent = new AndroidIntent(
+                        action: 'action_view',
+                        data: Uri.encodeFull(
+                            "https://www.google.com/maps/dir/?api=1&origin=" +
+                                origin + "&destination=" + destination + "&travelmode=driving&dir_action=navigate"),
+                        package: 'com.google.android.apps.maps');
+                    intent.launch();
+                  }
+                  else {
+                      String url = "https://www.google.com/maps/dir/?api=1&origin=" + origin + "&destination=" + destination + "&travelmode=driving&dir_action=navigate";
+                      if (await canLaunch(url)) {
+                            await launch(url);
+                    } else {
+                          throw 'Could not launch $url';
+                    }
+                  }
                 },
               ),
             );
