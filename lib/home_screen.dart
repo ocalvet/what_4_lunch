@@ -14,7 +14,20 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String textToShow = generatedPlace?.name ?? 'Tab the screen to generate a Place';
+    String textToShow = generatedPlace?.name ?? 'Tab the screen';
+    String textSecond = generatedPlace?.name ?? 'to generate a Place';
+    List<Widget> widgets = <Widget>[
+      Text(textToShow,
+          style: Theme.of(context).textTheme.display1,
+          textAlign: TextAlign.center),
+    ];
+    if (textToShow != textSecond) {
+      widgets.add(
+        Text(textSecond,
+            style: Theme.of(context).textTheme.display1,
+            textAlign: TextAlign.center),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('What4Lunch'),
@@ -22,11 +35,14 @@ class HomeScreenState extends State<HomeScreen> {
       body: GestureDetector(
         child: Container(
           child: Center(
-            child:
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(textToShow, style: Theme.of(context).textTheme.display1, textAlign: TextAlign.center),
-                ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: widgets,
+              ),
+            ),
           ),
         ),
         onTap: _generateRandomPlace,
