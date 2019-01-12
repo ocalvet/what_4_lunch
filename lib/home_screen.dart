@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:what_4_lunch/place.dart';
 import 'package:what_4_lunch/places.dart';
+import 'package:vibration/vibration.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -50,7 +51,10 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _generateRandomPlace() {
+  _generateRandomPlace() async {
+    if (await Vibration.hasVibrator()) {
+      Vibration.vibrate(duration: 500);
+    }
     this.setState(() {
       generatedPlace = places.getRandomPlace();
     });
