@@ -23,7 +23,10 @@ class HomeScreenState extends State<HomeScreen> {
         child: Container(
           child: Center(
             child:
-                Text(textToShow, style: Theme.of(context).textTheme.display1, textAlign: TextAlign.center),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(textToShow, style: Theme.of(context).textTheme.display1, textAlign: TextAlign.center),
+                ),
           ),
         ),
         onTap: _generateRandomPlace,
