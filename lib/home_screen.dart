@@ -17,17 +17,14 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     String textToShow = generatedPlace?.name ?? 'Tab the screen';
     String textSecond = generatedPlace?.name ?? 'to generate a Place';
-    List<Widget> widgets = <Widget>[
-      Text(textToShow,
-          style: Theme.of(context).textTheme.display1,
-          textAlign: TextAlign.center),
-    ];
+    List<Widget> widgets = <Widget>[_bigText(textToShow, context)];
     if (textToShow != textSecond) {
-      widgets.add(
-        Text(textSecond,
-            style: Theme.of(context).textTheme.display1,
-            textAlign: TextAlign.center),
-      );
+      widgets.add(_bigText(textSecond, context));
+    } else {
+      widgets.add(Padding(
+        padding: EdgeInsets.only(top: 10),
+      ));
+      widgets.add(_upDown());
     }
     return Scaffold(
       appBar: AppBar(
@@ -49,6 +46,33 @@ class HomeScreenState extends State<HomeScreen> {
         onTap: _generateRandomPlace,
       ),
     );
+  }
+
+  Widget _upDown() {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+            iconSize: 64,
+            color: Colors.green,
+            icon: Icon(Icons.thumb_up),
+            onPressed: () {},
+          ),
+          IconButton(
+            iconSize: 64,
+            color: Colors.red,
+            icon: Icon(Icons.thumb_down),
+            onPressed: () {},
+          )
+        ],
+      );
+  }
+
+  Widget _bigText(String text, BuildContext context) {
+    TextStyle textStyle = Theme.of(context).textTheme.display1;
+    return Text(text,
+          style: textStyle,
+          textAlign: TextAlign.center,);
   }
 
   _generateRandomPlace() async {
