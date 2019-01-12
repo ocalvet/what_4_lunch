@@ -14,19 +14,19 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String textToShow = generatedPlace?.name ?? 'Generate a Place';
+    String textToShow = generatedPlace?.name ?? 'Tab the screen to generate a Place';
     return Scaffold(
       appBar: AppBar(
         title: Text('What4Lunch'),
       ),
-      body: Container(
-        child: Center(
-          child: Text(textToShow, style: Theme.of(context).textTheme.display1),
+      body: GestureDetector(
+        child: Container(
+          child: Center(
+            child:
+                Text(textToShow, style: Theme.of(context).textTheme.display1, textAlign: TextAlign.center),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _generateRandomPlace,
-        child: Icon(Icons.refresh),
+        onTap: _generateRandomPlace,
       ),
     );
   }
@@ -34,6 +34,6 @@ class HomeScreenState extends State<HomeScreen> {
   _generateRandomPlace() {
     this.setState(() {
       generatedPlace = places.getRandomPlace();
-    });    
+    });
   }
 }

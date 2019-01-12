@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_4_lunch/HomeScreen.dart';
+import 'package:what_4_lunch/home_screen.dart';
 
 class What4LunchApp extends StatelessWidget {
   @override
