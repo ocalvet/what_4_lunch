@@ -60,7 +60,7 @@ class _PlaceSelectorState extends State<PlaceSelector> {
                 onPressed: () async {
                   print('One day we will open a map here with directions');
                   String origin =
-                      "901%20Penninsula%20corp%20drive%20boca%20raton%20fl"; // lat,long like 123.34,68.56
+                      "901 Penninsula corp drive boca raton fl"; // lat,long like 123.34,68.56
                   // String destination="someEndLocationStringAddress or lat,long";
                   String destination = '${generatedPlace.name}';
                   if (LocalPlatform().isAndroid) {
@@ -75,12 +75,12 @@ class _PlaceSelectorState extends State<PlaceSelector> {
                         package: 'com.google.android.apps.maps');
                     intent.launch();
                   } else {
-                    String url =
+                    String url = Uri.encodeFull(
                         "https://www.google.com/maps/dir/?api=1&origin=" +
                             origin +
                             "&destination=" +
                             destination +
-                            "&travelmode=driving&dir_action=navigate";
+                            "&travelmode=driving&dir_action=navigate");
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
