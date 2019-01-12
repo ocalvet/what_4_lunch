@@ -28,20 +28,20 @@ class _PlaceSelectorState extends State<PlaceSelector> {
       widgets.add(_upDown(context));
     }
     return GestureDetector(
-        child: Container(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: widgets,
-              ),
+      child: Container(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: widgets,
             ),
           ),
         ),
-        onTap: _generateRandomPlace,
-      );
+      ),
+      onTap: _generateRandomPlace,
+    );
   }
 
   Widget _upDown(BuildContext context) {
@@ -59,24 +59,32 @@ class _PlaceSelectorState extends State<PlaceSelector> {
                 label: 'Map',
                 onPressed: () async {
                   print('One day we will open a map here with directions');
-                  String origin="901 Penninsula corp drive boca raton fl";  // lat,long like 123.34,68.56
+                  String origin =
+                      "901%20Penninsula%20corp%20drive%20boca%20raton%20fl"; // lat,long like 123.34,68.56
                   // String destination="someEndLocationStringAddress or lat,long";
-                  String destination='${generatedPlace.name}';
+                  String destination = '${generatedPlace.name}';
                   if (LocalPlatform().isAndroid) {
                     final AndroidIntent intent = new AndroidIntent(
                         action: 'action_view',
                         data: Uri.encodeFull(
                             "https://www.google.com/maps/dir/?api=1&origin=" +
-                                origin + "&destination=" + destination + "&travelmode=driving&dir_action=navigate"),
+                                origin +
+                                "&destination=" +
+                                destination +
+                                "&travelmode=driving&dir_action=navigate"),
                         package: 'com.google.android.apps.maps');
                     intent.launch();
-                  }
-                  else {
-                      String url = "https://www.google.com/maps/dir/?api=1&origin=" + origin + "&destination=" + destination + "&travelmode=driving&dir_action=navigate";
-                      if (await canLaunch(url)) {
-                            await launch(url);
+                  } else {
+                    String url =
+                        "https://www.google.com/maps/dir/?api=1&origin=" +
+                            origin +
+                            "&destination=" +
+                            destination +
+                            "&travelmode=driving&dir_action=navigate";
+                    if (await canLaunch(url)) {
+                      await launch(url);
                     } else {
-                          throw 'Could not launch $url';
+                      throw 'Could not launch $url';
                     }
                   }
                 },
