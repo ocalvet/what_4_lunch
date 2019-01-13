@@ -118,8 +118,9 @@ class _PlaceSelectorState extends State<PlaceSelector> {
     if (await Vibration.hasVibrator()) {
       Vibration.vibrate(duration: 500);
     }
+    Place randomPlace = await places.getRandomPlace();
     this.setState(() {
-      generatedPlace = places.getRandomPlace();
+      generatedPlace = randomPlace;
     });
   }
 }
