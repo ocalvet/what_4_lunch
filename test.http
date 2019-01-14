@@ -1,0 +1,9 @@
+GET https://what4lunch-api.azurewebsites.net/api/random
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/weatherByZip
+Content-Type: application/json
+
+{
+    "zipCode": 33486
+}
