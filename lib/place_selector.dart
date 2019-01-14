@@ -52,46 +52,7 @@ class _PlaceSelectorState extends State<PlaceSelector> {
           iconSize: 64,
           color: Colors.green,
           icon: Icon(Icons.thumb_up),
-          onPressed: () async {
-            final snackBar = SnackBar(
-              content: Text('Yes, we are going to ${generatedPlace.name}'),
-              action: SnackBarAction(
-                label: 'Map',
-                onPressed: () async {
-                  print('One day we will open a map here with directions');
-                  String origin =
-                      "901 Penninsula corp drive boca raton fl"; // lat,long like 123.34,68.56
-                  // String destination="someEndLocationStringAddress or lat,long";
-                  String destination = '${generatedPlace.name}';
-                  if (LocalPlatform().isAndroid) {
-                    final AndroidIntent intent = new AndroidIntent(
-                        action: 'action_view',
-                        data: Uri.encodeFull(
-                            "https://www.google.com/maps/dir/?api=1&origin=" +
-                                origin +
-                                "&destination=" +
-                                destination +
-                                "&travelmode=driving&dir_action=navigate"),
-                        package: 'com.google.android.apps.maps');
-                    intent.launch();
-                  } else {
-                    String url = Uri.encodeFull(
-                        "https://www.google.com/maps/dir/?api=1&origin=" +
-                            origin +
-                            "&destination=" +
-                            destination +
-                            "&travelmode=driving&dir_action=navigate");
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  }
-                },
-              ),
-            );
-            Scaffold.of(context).showSnackBar(snackBar);
-          },
+          onPressed: _selectPlace,
         ),
         IconButton(
           iconSize: 64,
@@ -103,6 +64,47 @@ class _PlaceSelectorState extends State<PlaceSelector> {
         )
       ],
     );
+  }
+
+  _selectPlace() async {
+    final snackBar = SnackBar(
+      content: Text('Yes, we are going to ${generatedPlace.name}'),
+      action: SnackBarAction(
+        label: 'Map',
+        onPressed: () async {
+          print('One day we will open a map here with directions');
+          String origin =
+              "901 Penninsula corp drive boca raton fl"; // lat,long like 123.34,68.56
+          // String destination="someEndLocationStringAddress or lat,long";
+          String destination = '${generatedPlace.name}';
+          if (LocalPlatform().isAndroid) {
+            final AndroidIntent intent = new AndroidIntent(
+                action: 'action_view',
+                data: Uri.encodeFull(
+                    "https://www.google.com/maps/dir/?api=1&origin=" +
+                        origin +
+                        "&destination=" +
+                        destination +
+                        "&travelmode=driving&dir_action=navigate"),
+                package: 'com.google.android.apps.maps');
+            intent.launch();
+          } else {
+            String url = Uri.encodeFull(
+                "https://www.google.com/maps/dir/?api=1&origin=" +
+                    origin +
+                    "&destination=" +
+                    destination +
+                    "&travelmode=driving&dir_action=navigate");
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Could not launch $url';
+            }
+          }
+        },
+      ),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   Widget _bigText(String text, BuildContext context) {
