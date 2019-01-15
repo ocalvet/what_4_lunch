@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:what_4_lunch/weather.dart';
-import 'package:what_4_lunch/weatherService.dart';
+import 'package:what_4_lunch/weather_service.dart';
 
 void main() {
   test('mapWeather should convert a json string into a Weather model', () {

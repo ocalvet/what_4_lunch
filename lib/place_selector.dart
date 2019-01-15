@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:what_4_lunch/place.dart';
-import 'package:what_4_lunch/places.dart';
+import 'package:what_4_lunch/place_service.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:platform/platform.dart';
 import 'package:url_launcher/url_launcher.dart';

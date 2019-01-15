@@ -1,7 +1,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:what_4_lunch/place.dart';
-import 'package:what_4_lunch/places.dart';
+import 'package:what_4_lunch/place_service.dart';
 
 void main() {
   test('mapPlace should convert a json string into a Place model', () {

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:what_4_lunch/place.dart';
 import 'package:http/http.dart' as http;
 
-class Places {
+class PlaceService {
   final String apiEndpoint = 'https://what4lunch-api.azurewebsites.net/api/random';
 
   getRandomPlace() async {
@@ -18,4 +18,4 @@ class Places {
   }
 }
 
-final places = Places();
+final places = PlaceService();
