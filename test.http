@@ -23,5 +23,86 @@ Content-Type: application/json
         "zipCode": "33431"
       }
     ],
-    "insertDate": "2019-01-15T16:43:39.528Z"
+  }
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/places
+Content-Type: application/json
+
+{
+    "name": "5 Spice",
+    "imageUrl": "https://res.cloudinary.com/grubhub/image/upload/w_70,h_70,f_auto,fl_lossy,q_80,c_fit/l9wo3pywu1sylxeg338i",
+    "addresses": [
+      {
+        "address": "1200 Yamato Rd Ste AI",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33431"
+      }
+    ]
+  }
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/places
+Content-Type: application/json
+
+{
+    "name": "Caribbean Grill",
+    "addresses": [
+      {
+        "address": "1332 Nw Boca Raton Blvd",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33432"
+      }
+    ]
+  }
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/places
+Content-Type: application/json
+
+{
+    "name": "Rocksteady Jamaican Bistro",
+    "addresses": [
+      {
+        "address": "2399 N FEDERAL HWY",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33431"
+      }
+    ]
+  }
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/places
+Content-Type: application/json
+
+{
+    "name": "Punjab Indian",
+    "addresses": [
+      {
+        "address": "1801 N FEDERAL HWY",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33431"
+      }
+    ]
+  }
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/places
+Content-Type: application/json
+
+{
+    "name": "Bombay Cafe",
+    "imageUrl": "http://www.bombaycafeboca.com/wp-content/uploads/2017/03/Bombay-Cafe-Logo-footer-pink.png",
+    "addresses": [
+      {
+        "address": "1200 Yamato Road, Suite A5",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33431"
+      }
+    ]
   }
