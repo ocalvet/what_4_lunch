@@ -8,9 +8,9 @@ void main() {
     String jsonStr = """{"name":"Shane's","imageUrl":"https://shanesmedia.azureedge.net/images/logo.png","addresses":[{"address":"2240 NW 19th Street","city":"Boca Raton","state":"FL","zipCode":"33431"}]}""";
     Place place = places.mapPlace(jsonStr);
     expect(place.name, equals("Shane's"));
-    expect(place.address.address, equals("2240 NW 19th Street"));
-    expect(place.address.city, equals("Boca Raton"));
-    expect(place.address.state, equals("FL"));
-    expect(place.address.zipCode, equals("33431"));
+    expect(place.addresses[0].address, equals("2240 NW 19th Street"));
+    expect(place.addresses[0].city, equals("Boca Raton"));
+    expect(place.addresses[0].state, equals("FL"));
+    expect(place.addresses[0].zipCode, equals("33431"));
   }); 
 }
