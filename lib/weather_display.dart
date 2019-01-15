@@ -10,18 +10,15 @@ class WeatherDisplay extends StatefulWidget {
 class _WeatherDisplayState extends State<WeatherDisplay> {
   double temp;
   @override
-  void initState() async {
-    Weather weatherData = await weatherService.getByZip(33486);
-    setState(() {
+  void initState() {
+    weatherService.getByZip(33486).then((Weather weatherData) => setState(() {
       temp = weatherData.main.temp;
-    });
+    }));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Temp: $temp°'),
-    );
+    return Text('Temp: $temp°');
   }
 }
