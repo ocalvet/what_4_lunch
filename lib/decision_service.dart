@@ -1,3 +1,21 @@
+import 'dart:convert';
+
+import 'package:what_4_lunch/decision.dart';
+import 'package:http/http.dart' as http;
+
 class DecisionService {
-  
+  final String apiEndpoint = 'https://what4lunch-api.azurewebsites.net/api/decisions';
+
+  Future<List<Decision>> getDecisions() async {
+    http.Response response = await http.get(apiEndpoint);
+    List<Map<String, dynamic>> decodedJson = json.decode(response.body);
+    return decodedJson.map((json) => Decision.fromJson(json)).toList();
+  }
+
+  Decision mapDecision(String jsonStr) {
+    Map<String, dynamic> jsonMap = json.decode(jsonStr);
+    return Decision.fromJson(jsonMap);
+  }
 }
+
+DecisionService decisions = DecisionService();
