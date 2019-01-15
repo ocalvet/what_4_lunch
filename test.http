@@ -1,9 +1,27 @@
 GET https://what4lunch-api.azurewebsites.net/api/random
 
 ###
-POST https://what4lunch-api.azurewebsites.net/api/weatherByZip
+GET https://what4lunch-api.azurewebsites.net/api/weather/zip/33486
+Content-Type: application/json
+
+###
+GET https://what4lunch-api.azurewebsites.net/api/places
+Content-Type: application/json
+
+###
+POST https://what4lunch-api.azurewebsites.net/api/places
 Content-Type: application/json
 
 {
-    "zipCode": 33486
-}
+    "name": "Whole Foods",
+    "imageUrl": "https://www.newhope.com/sites/newhope360.com/files/styles/article_featured_standard/public/uploads/2014/07/whole-foods-logowhole-foods-behance-xputf7ta.jpg?itok=aKl4PyjP",
+    "addresses": [
+      {
+        "address": "1400 Glades Rd Ste 110",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33431"
+      }
+    ],
+    "insertDate": "2019-01-15T16:43:39.528Z"
+  }

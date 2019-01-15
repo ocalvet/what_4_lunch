@@ -7,7 +7,6 @@ class PlaceService {
   final String apiEndpoint = 'https://what4lunch-api.azurewebsites.net/api/random';
 
   getRandomPlace() async {
-    // return _places[_random.nextInt(_places.length)];
     http.Response response = await http.get(apiEndpoint);
     return mapPlace(response.body);
   }
