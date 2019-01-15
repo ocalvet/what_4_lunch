@@ -27,6 +27,8 @@ dependencies:
   url_launcher: ^4.0.3
 
   http: ^0.12.0+1
+
+  location: ^1.4.1
   
 dev_dependencies:
   flutter_test:
