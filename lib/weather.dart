@@ -131,11 +131,11 @@ class Main {
   Main({this.temp, this.pressure, this.humidity, this.tempMin, this.tempMax});
 
   Main.fromJson(Map<String, dynamic> json) {
-    temp = json['temp'];
-    pressure = json['pressure'];
-    humidity = json['humidity'];
-    tempMin = json['temp_min'];
-    tempMax = json['temp_max'];
+    temp = json['temp'].toDouble();
+    pressure = json['pressure'].toDouble();
+    humidity = json['humidity'].toDouble();
+    tempMin = json['temp_min'].toDouble();
+    tempMax = json['temp_max'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
