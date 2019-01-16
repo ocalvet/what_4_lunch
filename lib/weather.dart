@@ -123,8 +123,8 @@ class WeatherCondition {
 
 class Main {
   double temp;
-  int pressure;
-  int humidity;
+  double pressure;
+  double humidity;
   double tempMin;
   double tempMax;
 

@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:what_4_lunch/constants.dart';
 import 'package:what_4_lunch/weather.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherService {
-  final String apiEndpoint = 'https://what4lunch-api.azurewebsites.net/api/weather';
+  final String apiEndpoint = '$API_ENDPOINT/api/weather';
 
   Future<Weather> getByZip(int zipCode) async {
     http.Response response = await http.get('$apiEndpoint/zip/$zipCode');
