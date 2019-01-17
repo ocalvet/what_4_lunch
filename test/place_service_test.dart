@@ -4,6 +4,7 @@ import 'package:what_4_lunch/place_service.dart';
 
 void main() {
   test('mapPlace should convert a json string into a Place model', () {
+    PlaceService places = PlaceService();
     String jsonStr = """{"name":"Shane's","imageUrl":"https://shanesmedia.azureedge.net/images/logo.png","addresses":[{"address":"2240 NW 19th Street","city":"Boca Raton","state":"FL","zipCode":"33431"}]}""";
     Place place = places.mapPlace(jsonStr);
     expect(place.name, equals("Shane's"));
