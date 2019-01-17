@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:what_4_lunch/bloc.dart';
+import 'package:what_4_lunch/bloc_provider.dart';
 import 'package:what_4_lunch/weather.dart';
-import 'package:what_4_lunch/weather_service.dart';
 import 'package:location/location.dart';
 
-class WeatherDisplay extends StatefulWidget {
+class WeatherDisplay extends StatelessWidget {
+  final currentLocation = <String, double>{};
+  final location = Location();
   @override
-  _WeatherDisplayState createState() => _WeatherDisplayState();
-}
-
-class _WeatherDisplayState extends State<WeatherDisplay> {
-  double temp;
-  var currentLocation = <String, double>{};
-  var location = Location();
-  @override
-  void initState() {
+  Widget build(BuildContext context) {
+    ApplicationBloc bloc = BlocProvider.of<ApplicationBloc>(context);
     location.getLocation().then((Map<String, double> location) {
       print(location);
-      return weatherService.getByLatLon(Coord(
+      bloc.updateWeatherConditions(Coord(
         lat: location["latitude"],
         lon: location["longitude"],
       ));
-    }).then((Weather weatherData) => setState(() {
-          temp = weatherData.main.temp;
-        }));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('Temp: $temp°');
+    });
+    return StreamBuilder<Weather>(
+      stream: bloc.weather$,
+      builder: (BuildContext context, AsyncSnapshot<Weather> snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        double temp = snapshot.data.main.temp;
+        return Text('Temp: $temp°');
+      },
+    );
   }
 }

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class PlaceService {
   final String apiEndpoint = '$API_ENDPOINT/api/random';
 
-  getRandomPlace() async {
+  Future<Place> getRandomPlace() async {
     http.Response response = await http.get(apiEndpoint);
     return mapPlace(response.body);
   }
@@ -17,5 +17,3 @@ class PlaceService {
     return Place.fromJson(jsonMap);
   }
 }
-
-final places = PlaceService();

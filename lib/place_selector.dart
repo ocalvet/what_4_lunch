@@ -1,50 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:vibration/vibration.dart';
+import 'package:what_4_lunch/bloc.dart';
+import 'package:what_4_lunch/bloc_provider.dart';
+import 'package:what_4_lunch/decision.dart';
+// import 'package:vibration/vibration.dart';
 import 'package:what_4_lunch/place.dart';
-import 'package:what_4_lunch/place_service.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:platform/platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PlaceSelector extends StatefulWidget {
-  @override
-  _PlaceSelectorState createState() => _PlaceSelectorState();
-}
-
-class _PlaceSelectorState extends State<PlaceSelector> {
-  Place generatedPlace;
-
+class PlaceSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String textToShow = generatedPlace?.name ?? 'Tab the screen';
-    String textSecond = generatedPlace?.name ?? 'to generate a Place';
-    List<Widget> widgets = <Widget>[_bigText(textToShow, context)];
-    if (textToShow != textSecond) {
-      widgets.add(_bigText(textSecond, context));
-    } else {
-      widgets.add(Padding(
-        padding: EdgeInsets.only(top: 10),
-      ));
-      widgets.add(_upDown(context));
-    }
-    return GestureDetector(
-      child: Container(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: widgets,
+    ApplicationBloc bloc = BlocProvider.of<ApplicationBloc>(context);
+    return StreamBuilder<Place>(
+      stream: bloc.place$,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        Place generatedPlace = snapshot.data;
+        String textToShow = snapshot.hasData ? generatedPlace.name : 'Tab the screen';
+        String textSecond = snapshot.hasData ? generatedPlace.name : 'to generate a Place';
+        List<Widget> widgets = <Widget>[_bigText(textToShow, context)];
+        if (textToShow != textSecond) {
+          widgets.add(_bigText(textSecond, context));
+        } else {
+          widgets.add(Padding(
+            padding: EdgeInsets.only(top: 10),
+          ));
+          widgets.add(_upDown(context, generatedPlace, bloc));
+        }
+        return GestureDetector(
+          child: Container(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: widgets,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      onTap: _generateRandomPlace,
+          onTap: () => bloc.getRandomPlace(),
+        );
+      },
     );
   }
 
-  Widget _upDown(BuildContext context) {
+  Widget _upDown(BuildContext context, Place generatedPlace, ApplicationBloc bloc) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -52,32 +54,42 @@ class _PlaceSelectorState extends State<PlaceSelector> {
           iconSize: 64,
           color: Colors.green,
           icon: Icon(Icons.thumb_up),
-          onPressed: _selectPlace,
+          onPressed: () => _selectPlace(generatedPlace, context),
         ),
         IconButton(
           iconSize: 64,
           color: Colors.red,
           icon: Icon(Icons.thumb_down),
-          onPressed: () {
-            _generateRandomPlace();
-          },
+          onPressed: () => _rejectPlace(bloc),
         )
       ],
     );
   }
 
-  _selectPlace() async {
+  _rejectPlace(ApplicationBloc bloc) async {
+    // await decisions.createDecision(Decision(
+    //   place: generatedPlace,
+    //   attendees: [],
+    //   dayOfWeek: "monday",
+    //   nextMeetingIn: Duration(minutes: 45),
+    //   time: DateTime.now(),
+    //   weather: currentWeather
+    // ));
+    bloc.getRandomPlace();
+  }
+
+  _selectPlace(Place generatedPlace, BuildContext context) async {
     final snackBar = SnackBar(
       content: Text('Yes, we are going to ${generatedPlace.name}'),
       action: SnackBarAction(
         label: 'Map',
-        onPressed: _navigateToPlace,
+        onPressed: () => _navigateToPlace(generatedPlace),
       ),
     );
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  _navigateToPlace() async {
+  _navigateToPlace(Place generatedPlace) async {
     print('One day we will open a map here with directions');
     String origin =
         "901 Penninsula corp drive boca raton fl"; // lat,long like 123.34,68.56
@@ -116,15 +128,5 @@ class _PlaceSelectorState extends State<PlaceSelector> {
       style: textStyle,
       textAlign: TextAlign.center,
     );
-  }
-
-  _generateRandomPlace() async {
-    // if (await Vibration.hasVibrator()) {
-    //   Vibration.vibrate(duration: 500);
-    // }
-    Place randomPlace = await places.getRandomPlace();
-    this.setState(() {
-      generatedPlace = randomPlace;
-    });
   }
 }

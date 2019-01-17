@@ -22,5 +22,3 @@ class WeatherService {
       return Weather.fromJson(jsonMap);
     }
 }
-
-final weatherService = WeatherService();
