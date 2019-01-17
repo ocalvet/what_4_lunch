@@ -1,3 +1,4 @@
+import 'package:location/location.dart';
 import 'package:what_4_lunch/blocs/bloc_base.dart';
 import 'package:what_4_lunch/models/place.dart';
 import 'package:rxdart/rxdart.dart';
@@ -8,6 +9,7 @@ import 'package:what_4_lunch/api/weather_service.dart';
 class ApplicationBloc extends BlocBase {
   final WeatherService weatherService;
   final PlaceService placeService;
+  final location = Location();
   ApplicationBloc({this.weatherService, this.placeService});
 
   // Place
@@ -19,14 +21,19 @@ class ApplicationBloc extends BlocBase {
   BehaviorSubject<Weather> weatherSubject = BehaviorSubject<Weather>();
   Stream<Weather> get weather$ => weatherSubject.stream;
   Sink<Weather> get _weatherCondition => weatherSubject.sink;
-  
+
   getRandomPlace() async {
     Place randomPlace = await placeService.getRandomPlace();
     _randomPlace.add(randomPlace);
   }
 
-  updateWeatherConditions(Coord coord) async {
-    Weather weather = await weatherService.getByLatLon(coord);
+  updateWeatherConditions() async {
+    Map<String, double> l = await location.getLocation();
+    print(l);
+    Weather weather = await weatherService.getByLatLon(Coord(
+      lat: l["latitude"],
+      lon: l["longitude"],
+    ));
     _weatherCondition.add(weather);
   }
 

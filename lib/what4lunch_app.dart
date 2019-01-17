@@ -14,6 +14,7 @@ class What4LunchApp extends StatelessWidget {
       weatherService: weatherService,
       placeService: placeService,
     );
+    bloc.updateWeatherConditions();
     return BlocProvider(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
