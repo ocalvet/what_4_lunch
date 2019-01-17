@@ -15,8 +15,10 @@ class PlaceSelector extends StatelessWidget {
       stream: bloc.place$,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         Place generatedPlace = snapshot.data;
-        String textToShow = snapshot.hasData ? generatedPlace.name : 'Tab the screen';
-        String textSecond = snapshot.hasData ? generatedPlace.name : 'to generate a Place';
+        String textToShow =
+            snapshot.hasData ? generatedPlace.name : 'Tab the screen';
+        String textSecond =
+            snapshot.hasData ? generatedPlace.name : 'to generate a Place';
         List<Widget> widgets = <Widget>[_bigText(textToShow, context)];
         if (textToShow != textSecond) {
           widgets.add(_bigText(textSecond, context));
@@ -27,16 +29,12 @@ class PlaceSelector extends StatelessWidget {
           widgets.add(_upDown(context, generatedPlace, bloc));
         }
         return GestureDetector(
-          child: Container(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: widgets,
-                ),
-              ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: widgets,
             ),
           ),
           onTap: () => bloc.getRandomPlace(),
@@ -45,7 +43,8 @@ class PlaceSelector extends StatelessWidget {
     );
   }
 
-  Widget _upDown(BuildContext context, Place generatedPlace, ApplicationBloc bloc) {
+  Widget _upDown(
+      BuildContext context, Place generatedPlace, ApplicationBloc bloc) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
