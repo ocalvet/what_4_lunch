@@ -22,6 +22,9 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               AttendeeSelector(),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
               PlaceSelector(),
             ],
           ),

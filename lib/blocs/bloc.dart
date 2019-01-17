@@ -1,6 +1,7 @@
 import 'package:location/location.dart';
 import 'package:what_4_lunch/api/decision_service.dart';
 import 'package:what_4_lunch/blocs/bloc_base.dart';
+import 'package:what_4_lunch/models/attendee.dart';
 import 'package:what_4_lunch/models/decision.dart';
 import 'package:what_4_lunch/models/place.dart';
 import 'package:rxdart/rxdart.dart';
@@ -30,9 +31,19 @@ class ApplicationBloc extends BlocBase {
   Stream<Duration> get nextMeeting$ => _nextMeetingSubject.stream;
   Sink<Duration> get _nextMeeting => _nextMeetingSubject.sink;
   // Attendees
-  BehaviorSubject<List<String>> _attendeesSubject = BehaviorSubject<List<String>>();
-  Stream<List<String>> get attendees$ => _attendeesSubject.stream;
-  Sink<List<String>> get _attendees => _attendeesSubject.sink;
+  BehaviorSubject<List<Attendee>> _attendeesSubject = BehaviorSubject<List<Attendee>>(seedValue: [
+    Attendee(name: "John", attending: true),
+    Attendee(name: "Jeff", attending: true),
+    Attendee(name: "Ovidio", attending: true),
+    Attendee(name: "Carlos", attending: true),
+    Attendee(name: "Faisal", attending: true),
+    Attendee(name: "Mike", attending: true),
+    Attendee(name: "Danny", attending: false),
+    Attendee(name: "Yohay", attending: false),
+    Attendee(name: "Steven", attending: false),
+  ]);
+  Stream<List<Attendee>> get attendees$ => _attendeesSubject.stream;
+  Sink<List<Attendee>> get _attendees => _attendeesSubject.sink;
 
   getRandomPlace() async {
     Place randomPlace = await placeService.getRandomPlace();
@@ -49,8 +60,18 @@ class ApplicationBloc extends BlocBase {
     _weatherCondition.add(weather);
   }
 
-  selectAttendees(List<String> attendees) {
-    _attendees.add(attendees);
+  addAttendee(Attendee attendee) async {
+    print('adding $attendee');
+    List<Attendee> selectedAttendees = await _attendeesSubject.last;
+    selectedAttendees.add(attendee);
+    _attendees.add(List.from(selectedAttendees));
+  }
+
+  removeAttendee(Attendee attendee) async {
+    print('removing $attendee');
+    List<Attendee> selectedAttendees = await _attendeesSubject.last;
+    selectedAttendees.removeWhere((a) => a.name == attendee.name);
+    _attendees.add(List.from(selectedAttendees));
   }
 
   updateNextMeeting(Duration nextMeetingIn) {
@@ -61,7 +82,7 @@ class ApplicationBloc extends BlocBase {
     Place place = await _randomPlaceSubject.last;
     Weather weather = await _weatherSubject.last;
     Duration nextMeeting = await _nextMeetingSubject.last;
-    List<String> attendees = await _attendeesSubject.last;
+    List<Attendee> attendees = await _attendeesSubject.last;
     DateTime date = DateTime.now();
     Decision decision = Decision(
       place: place,
@@ -69,7 +90,7 @@ class ApplicationBloc extends BlocBase {
       time: date,
       dayOfWeek: date.weekday,
       nextMeetingIn: nextMeeting,
-      attendees: attendees,
+      attendees: attendees.where((a) => a.attending).map((a) => a.name),
       going: going,
     );
     try {
