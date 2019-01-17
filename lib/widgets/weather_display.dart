@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:what_4_lunch/bloc.dart';
-import 'package:what_4_lunch/bloc_provider.dart';
-import 'package:what_4_lunch/weather.dart';
+import 'package:what_4_lunch/blocs/bloc.dart';
+import 'package:what_4_lunch/blocs/bloc_provider.dart';
+import 'package:what_4_lunch/models/weather.dart';
 import 'package:location/location.dart';
 
 class WeatherDisplay extends StatelessWidget {

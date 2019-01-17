@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:what_4_lunch/place_selector.dart';
-import 'package:what_4_lunch/weather_display.dart';
+import 'package:what_4_lunch/widgets/place_selector.dart';
+import 'package:what_4_lunch/widgets/weather_display.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

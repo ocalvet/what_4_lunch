@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_4_lunch/bloc_base.dart';
+import 'package:what_4_lunch/blocs/bloc_base.dart';
 
 class BlocProvider<T extends BlocBase> extends StatefulWidget {
   BlocProvider({

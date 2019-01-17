@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:what_4_lunch/bloc.dart';
-import 'package:what_4_lunch/bloc_provider.dart';
+import 'package:what_4_lunch/blocs/bloc.dart';
+import 'package:what_4_lunch/blocs/bloc_provider.dart';
 // import 'package:vibration/vibration.dart';
-import 'package:what_4_lunch/place.dart';
+import 'package:what_4_lunch/models/place.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:platform/platform.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:what_4_lunch/home_screen.dart';
+import 'package:what_4_lunch/screens/home_screen.dart';
 import 'package:what_4_lunch/what4lunch_app.dart';
 
 void main() {

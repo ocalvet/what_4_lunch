@@ -1,5 +1,5 @@
-import 'package:what_4_lunch/place.dart';
-import 'package:what_4_lunch/weather.dart';
+import 'package:what_4_lunch/models/place.dart';
+import 'package:what_4_lunch/models/weather.dart';
 
 class Decision {
   final DateTime time;

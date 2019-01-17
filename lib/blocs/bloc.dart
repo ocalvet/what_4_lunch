@@ -1,9 +1,9 @@
-import 'package:what_4_lunch/bloc_base.dart';
-import 'package:what_4_lunch/place.dart';
+import 'package:what_4_lunch/blocs/bloc_base.dart';
+import 'package:what_4_lunch/models/place.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:what_4_lunch/place_service.dart';
-import 'package:what_4_lunch/weather.dart';
-import 'package:what_4_lunch/weather_service.dart';
+import 'package:what_4_lunch/api/place_service.dart';
+import 'package:what_4_lunch/models/weather.dart';
+import 'package:what_4_lunch/api/weather_service.dart';
 
 class ApplicationBloc extends BlocBase {
   final WeatherService weatherService;
