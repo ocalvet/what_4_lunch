@@ -8,38 +8,41 @@ class AttendeeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ApplicationBloc bloc = BlocProvider.of<ApplicationBloc>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Select Attendees'),
-        ),
-        body: StreamBuilder<List<Attendee>>(
-          stream: bloc.attendees$,
-          initialData: [],
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Attendee>> snapshot) {
-            List<Attendee> attendees = snapshot.data;
-            print(attendees);
-            return ListView.builder(
-              itemCount: attendees.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                    onTap: null,
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      child: Icon(Icons.person_outline),
+      appBar: AppBar(
+        title: Text('Select Attendees'),
+      ),
+      body: StreamBuilder<List<Attendee>>(
+        stream: bloc.attendees$,
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Attendee>> snapshot) {
+          List<Attendee> attendees = snapshot.hasData ? snapshot.data : [];
+          print('Total Attendees ${attendees.length}');
+          return ListView.builder(
+            itemCount: attendees.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                onTap: null,
+                leading: CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.person_outline),
+                ),
+                title: Row(
+                  children: [
+                    Expanded(child: Text(attendees[index].name)),
+                    Checkbox(
+                      value: attendees[index].attending,
+                      onChanged: (bool value) => bloc.updateAttendee(Attendee(
+                            name: attendees[index].name,
+                            attending: value,
+                          )),
                     ),
-                    title: Row(
-                      children: [
-                        Expanded(child: Text(attendees[index].name)),
-                        Checkbox(
-                            value: attendees[index].attending,
-                            onChanged: (bool value) => value
-                                ? bloc.addAttendee(attendees[index])
-                                : bloc.removeAttendee(attendees[index]))
-                      ],
-                    ));
-              },
-            );
-          },
-        ));
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 }

@@ -27,7 +27,7 @@ class ApplicationBloc extends BlocBase {
   BehaviorSubject<Decision> _decisionSubject = BehaviorSubject<Decision>();
   Stream<Decision> get decision$ => _decisionSubject.stream;
   // Next Meeting In
-  BehaviorSubject<Duration> _nextMeetingSubject = BehaviorSubject<Duration>();
+  BehaviorSubject<Duration> _nextMeetingSubject = BehaviorSubject<Duration>(seedValue: Duration(minutes: 0));
   Stream<Duration> get nextMeeting$ => _nextMeetingSubject.stream;
   Sink<Duration> get _nextMeeting => _nextMeetingSubject.sink;
   // Attendees
@@ -60,17 +60,10 @@ class ApplicationBloc extends BlocBase {
     _weatherCondition.add(weather);
   }
 
-  addAttendee(Attendee attendee) async {
-    print('adding $attendee');
-    List<Attendee> selectedAttendees = await _attendeesSubject.last;
-    selectedAttendees.add(attendee);
-    _attendees.add(List.from(selectedAttendees));
-  }
-
-  removeAttendee(Attendee attendee) async {
-    print('removing $attendee');
-    List<Attendee> selectedAttendees = await _attendeesSubject.last;
-    selectedAttendees.removeWhere((a) => a.name == attendee.name);
+  updateAttendee(Attendee attendee) async {
+    List<Attendee> selectedAttendees = await _attendeesSubject.first;
+    int index = selectedAttendees.indexWhere((a) => a.name == attendee.name);
+    selectedAttendees.replaceRange(index, index + 1, [attendee]);
     _attendees.add(List.from(selectedAttendees));
   }
 
