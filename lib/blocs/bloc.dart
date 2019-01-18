@@ -72,10 +72,10 @@ class ApplicationBloc extends BlocBase {
   }
 
   makeDecision(bool going) async {
-    Place place = await _randomPlaceSubject.last;
-    Weather weather = await _weatherSubject.last;
-    Duration nextMeeting = await _nextMeetingSubject.last;
-    List<Attendee> attendees = await _attendeesSubject.last;
+    Place place = await _randomPlaceSubject.first;
+    Weather weather = await _weatherSubject.first;
+    Duration nextMeeting = await _nextMeetingSubject.first;
+    List<Attendee> attendees = await _attendeesSubject.first;
     DateTime date = DateTime.now();
     Decision decision = Decision(
       place: place,
