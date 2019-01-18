@@ -10,11 +10,11 @@ import 'package:what_4_lunch/models/weather.dart';
 import 'package:what_4_lunch/api/weather_service.dart';
 
 class ApplicationBloc extends BlocBase {
-  final WeatherService weatherService;
-  final PlaceService placeService;
-  final DecisionService decisionService;
+  final WeatherService _weatherService;
+  final PlaceService _placeService;
+  final DecisionService _decisionService;
   final location = Location();
-  ApplicationBloc({this.weatherService, this.placeService, this.decisionService});
+  ApplicationBloc(this._weatherService, this._placeService, this._decisionService);
   // Place
   BehaviorSubject<Place> _randomPlaceSubject = BehaviorSubject<Place>();
   Stream<Place> get place$ => _randomPlaceSubject.stream;
@@ -46,14 +46,14 @@ class ApplicationBloc extends BlocBase {
   Sink<List<Attendee>> get _attendees => _attendeesSubject.sink;
 
   getRandomPlace() async {
-    Place randomPlace = await placeService.getRandomPlace();
+    Place randomPlace = await _placeService.getRandomPlace();
     _randomPlace.add(randomPlace);
   }
 
   updateWeatherConditions() async {
     Map<String, double> l = await location.getLocation();
     print(l);
-    Weather weather = await weatherService.getByLatLon(Coord(
+    Weather weather = await _weatherService.getByLatLon(Coord(
       lat: l["latitude"],
       lon: l["longitude"],
     ));
@@ -83,13 +83,13 @@ class ApplicationBloc extends BlocBase {
       time: date,
       dayOfWeek: date.weekday,
       nextMeetingIn: nextMeeting,
-      attendees: attendees.where((a) => a.attending).map((a) => a.name),
+      attendees: attendees.where((a) => a.attending).map((a) => a.name).toList(),
       going: going,
     );
     try {
-      await decisionService.createDecision(decision);
+      await _decisionService.createDecision(decision);
     } catch (e) {
-      print(e.toString());
+      print(e);
       _decisionSubject.addError(e);
     }
   }

@@ -52,7 +52,7 @@ class PlaceSelector extends StatelessWidget {
           iconSize: 64,
           color: Colors.green,
           icon: Icon(Icons.thumb_up),
-          onPressed: () => _selectPlace(generatedPlace, context),
+          onPressed: () => _selectPlace(generatedPlace, context, bloc),
         ),
         IconButton(
           iconSize: 64,
@@ -65,18 +65,12 @@ class PlaceSelector extends StatelessWidget {
   }
 
   _rejectPlace(ApplicationBloc bloc) async {
-    // await decisions.createDecision(Decision(
-    //   place: generatedPlace,
-    //   attendees: [],
-    //   dayOfWeek: "monday",
-    //   nextMeetingIn: Duration(minutes: 45),
-    //   time: DateTime.now(),
-    //   weather: currentWeather
-    // ));
+    bloc.makeDecision(false);
     bloc.getRandomPlace();
   }
 
-  _selectPlace(Place generatedPlace, BuildContext context) async {
+  _selectPlace(Place generatedPlace, BuildContext context, ApplicationBloc bloc) async {
+    bloc.makeDecision(true);
     final snackBar = SnackBar(
       content: Text('Yes, we are going to ${generatedPlace.name}'),
       action: SnackBarAction(

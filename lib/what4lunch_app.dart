@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:what_4_lunch/api/decision_service.dart';
 import 'package:what_4_lunch/blocs/bloc.dart';
 import 'package:what_4_lunch/blocs/bloc_provider.dart';
 import 'package:what_4_lunch/screens/attendee_screen.dart';
@@ -11,9 +12,11 @@ class What4LunchApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WeatherService weatherService = WeatherService();
     PlaceService placeService = PlaceService();
+    DecisionService decisionService = DecisionService();
     ApplicationBloc bloc = ApplicationBloc(
-      weatherService: weatherService,
-      placeService: placeService,
+      weatherService,
+      placeService,
+      decisionService,
     );
     bloc.updateWeatherConditions();
     return BlocProvider(

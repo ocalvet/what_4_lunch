@@ -14,13 +14,15 @@ class DecisionService {
   }
 
   createDecision(Decision decision) async {
+    Map<String, dynamic> bodyMap = decision.toJson();
+    print(bodyMap);
     http.Response response = await http.post(
       apiEndpoint,
-      headers: {"Content-Type": "application/json"},
-      body: decision.toJson(),
+      headers: { 'Content-Type': 'application/json' },
+      body: json.encode(bodyMap),
     );
-    Map<String, dynamic> responseJson = json.decode(response.body);
-    if(responseJson.containsKey("error")) throw Exception("Server error ${responseJson["error"]}");
+    print(response.statusCode);
+    if(response.statusCode != 200) throw Exception("Server error when creating a decision");
   }
 
   Decision mapDecision(String jsonStr) {

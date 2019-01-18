@@ -23,10 +23,10 @@ class Decision {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['time'] = time;
+    data['time'] = time.toIso8601String();
     data['dayOfWeek'] = dayOfWeek;
     if (this.attendees != null) {
-      data['attendees'] = attendees.map((v) => v.toString());
+      data['attendees'] = this.attendees;
     }
     data["nextMeetingIn"] = nextMeetingIn.inMinutes;
     data["weather"] = weather.toJson();
