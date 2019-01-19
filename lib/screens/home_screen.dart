@@ -11,30 +11,38 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('What4Lunch'),
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Positioned(
-            child: WeatherDisplay(),
-            top: 10,
-            right: 10,
-          ),
-          Positioned(
-            left: 20,
-            top: 25,
-            child: NextMeetingSelection(),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              AttendeeSelector(),
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-              ),
-              PlaceSelector(),
-            ],
-          ),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(Colors.white70, BlendMode.lighten),
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                    "https://cdn0.iconfinder.com/data/icons/food-thinline-icons-set/144/Food_and_Kitchen_Outline_Gyoza-512.png"))),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Positioned(
+              child: WeatherDisplay(),
+              top: 10,
+              right: 10,
+            ),
+            Positioned(
+              left: 20,
+              top: 25,
+              child: NextMeetingSelection(),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                AttendeeSelector(),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                ),
+                PlaceSelector(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
