@@ -1,12 +1,12 @@
 # What4Lunch
 
-An app to help us decide what to eat for lunch everyday. It is build with flutte.io, follow the getting started session to run the source locally.
+An app to help us decide what to eat for lunch everyday. It is build with [flutte.io](https://flutter.io/), follow the getting started session to run the source locally.
 
 ## Getting Started
 
 ### Dependencies
-- [Flutter](https://flutter.io)
-- Running Emulator or connected phone
+- Install [Flutter](https://flutter.io)
+- Make sure you have a running emulator or a connected device
 
 ### How to run
 
@@ -27,9 +27,9 @@ samples, guidance on mobile development, and a full API reference.
 ### TODO
 
 ***Things to collect***
-- Add time of decisson
-- Day of the week
-- People going
-- Time span until next meeting
-- Weather conditions
-- Date place was added (How old is the place for us)
+- [ ] Date place was added (How old is the place for us)
+- [x] Add time of decisson
+- [x] Day of the week
+- [x] People going
+- [x] Time span until next meeting
+- [x] Weather conditions
