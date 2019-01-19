@@ -3,7 +3,7 @@ import 'package:what_4_lunch/blocs/bloc.dart';
 import 'package:what_4_lunch/blocs/bloc_provider.dart';
 
 class NextMeetingSelection extends StatelessWidget {
-  final List<String> nextMeetingMinutes = ["0", "30", "60", "90"];
+  final List<String> nextMeetingMinutes = ["0", "30", "60", "90", "120"];
   @override
   Widget build(BuildContext context) {
     ApplicationBloc bloc = BlocProvider.of<ApplicationBloc>(context);
