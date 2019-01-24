@@ -6,6 +6,7 @@ import 'package:what_4_lunch/screens/attendee_screen.dart';
 import 'package:what_4_lunch/screens/decision_helper_screen.dart';
 import 'package:what_4_lunch/api/place_service.dart';
 import 'package:what_4_lunch/api/weather_service.dart';
+import 'package:what_4_lunch/screens/home_screen.dart';
 
 class What4LunchApp extends StatelessWidget {
   @override
@@ -24,8 +25,9 @@ class What4LunchApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'What4Lunch',
         routes: {
-          '/': (context) => DecisionHelperScreen(),
+          '/': (context) => HomeScreen(),
           '/attendees': (context) => AttendeeScreen(),
+          '/decision-helper': (context) => DecisionHelperScreen(),
         },
         initialRoute: '/',
       ),
