@@ -24,6 +24,7 @@ class What4LunchApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'What4Lunch',
+        theme: ThemeData.dark(),
         routes: {
           '/': (context) => HomeScreen(),
           '/attendees': (context) => AttendeeScreen(),
