@@ -9,7 +9,7 @@ class DecisionHelperScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('What4Lunch'),
+        title: Text('More Info'),
       ),
       body: Stack(
         fit: StackFit.expand,
