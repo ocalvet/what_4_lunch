@@ -12,8 +12,14 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: InkWell(
               child: Container(
+                decoration: BoxDecoration(color: Colors.green),
                 width: double.infinity,
-                child: Text('Make Decision'),
+                child: Center(
+                  child: Text(
+                    'Make Decision',
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                ),
               ),
               onTap: () {
                 Navigator.pushNamed(context, '/make-decision');
@@ -23,8 +29,12 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: InkWell(
               child: Container(
+                decoration: BoxDecoration(color: Colors.orange),
                 width: double.infinity,
-                child: Text('Help Us Decide'),
+                child: Center(
+                  child: Text('Help Us Decide',
+                      style: Theme.of(context).textTheme.title),
+                ),
               ),
               onTap: () {
                 Navigator.pushNamed(context, '/decision-helper');
