@@ -13,11 +13,24 @@ class HomeScreen extends StatelessWidget {
             child: InkWell(
               child: Container(
                 width: double.infinity,
-                child: Text('Hello'),
+                child: Text('Make Decision'),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/make-decision');
+              },
             ),
-          )
+          ),
+          Expanded(
+            child: InkWell(
+              child: Container(
+                width: double.infinity,
+                child: Text('Help Us Decide'),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, '/decision-helper');
+              },
+            ),
+          ),
         ],
       ),
     );
