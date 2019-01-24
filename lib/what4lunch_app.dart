@@ -7,6 +7,7 @@ import 'package:what_4_lunch/screens/decision_helper_screen.dart';
 import 'package:what_4_lunch/api/place_service.dart';
 import 'package:what_4_lunch/api/weather_service.dart';
 import 'package:what_4_lunch/screens/home_screen.dart';
+import 'package:what_4_lunch/screens/make_decision_screen.dart';
 
 class What4LunchApp extends StatelessWidget {
   @override
@@ -29,6 +30,7 @@ class What4LunchApp extends StatelessWidget {
           '/': (context) => HomeScreen(),
           '/attendees': (context) => AttendeeScreen(),
           '/decision-helper': (context) => DecisionHelperScreen(),
+          '/make-decision': (context) => MakeDecisionScreen(),
         },
         initialRoute: '/',
       ),
