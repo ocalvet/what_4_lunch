@@ -4,7 +4,7 @@ import 'package:what_4_lunch/widgets/next_meeting_selection.dart';
 import 'package:what_4_lunch/widgets/place_selector.dart';
 import 'package:what_4_lunch/widgets/weather_display.dart';
 
-class HomeScreen extends StatelessWidget {
+class DecisionHelperScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
