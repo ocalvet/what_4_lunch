@@ -12,6 +12,7 @@ class AttendeeSelector extends StatelessWidget {
       child: StreamBuilder<List<Attendee>>(
         stream: bloc.attendees$,
         builder: (BuildContext context, AsyncSnapshot<List<Attendee>> snapshot) {
+          if (!snapshot.hasData) return Container();
           return Badge(
             positionTop: -7,
             positionRight: -7,
