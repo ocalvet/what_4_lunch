@@ -15,6 +15,10 @@ class ApplicationBloc extends BlocBase {
   final DecisionService _decisionService;
   final location = Location();
   ApplicationBloc(this._weatherService, this._placeService, this._decisionService);
+  // Places
+  BehaviorSubject<List<Place>> _placesSubject = BehaviorSubject<List<Place>>();
+  Stream<List<Place>> get places$ => _placesSubject.stream;
+  Sink<List<Place>> get _places => _placesSubject.sink;
   // Place
   BehaviorSubject<Place> _randomPlaceSubject = BehaviorSubject<Place>();
   Stream<Place> get place$ => _randomPlaceSubject.stream;
@@ -50,6 +54,11 @@ class ApplicationBloc extends BlocBase {
     _randomPlace.add(randomPlace);
   }
 
+  getPlaces() async {
+    List<Place> places = await _placeService.getAllPlaces();
+    _places.add(places);
+  }
+
   updateWeatherConditions() async {
     Map<String, double> l = await location.getLocation();
     print(l);
@@ -65,6 +74,10 @@ class ApplicationBloc extends BlocBase {
     int index = selectedAttendees.indexWhere((a) => a.name == attendee.name);
     selectedAttendees.replaceRange(index, index + 1, [attendee]);
     _attendees.add(List.from(selectedAttendees));
+  }
+
+  selectPlace(Place place) {
+    _randomPlace.add(place);
   }
 
   updateNextMeeting(Duration nextMeetingIn) {
@@ -101,5 +114,6 @@ class ApplicationBloc extends BlocBase {
     _decisionSubject.close();
     _attendeesSubject.close();
     _nextMeetingSubject.close();
+    _placesSubject.close();
   }
 }

@@ -106,3 +106,6 @@ Content-Type: application/json
       }
     ]
   }
+
+###
+GET https://what4lunch-api.azurewebsites.net/api/decisions
