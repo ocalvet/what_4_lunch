@@ -17,7 +17,7 @@ class AttendeeSelector extends StatelessWidget {
             positionTop: -7,
             positionRight: -7,
             color: Colors.green,
-            value: snapshot.data.where((a) => a.attending).length.toString(), // value to show inside the badge
+            value: snapshot.data.where((a) => a.attending).length.toString(),
             child: RaisedButton.icon(
               icon: Icon(Icons.people),
               onPressed: () {

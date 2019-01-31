@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:what_4_lunch/blocs/bloc.dart';
 import 'package:what_4_lunch/blocs/bloc_provider.dart';
-// import 'package:vibration/vibration.dart';
 import 'package:what_4_lunch/models/place.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:platform/platform.dart';
@@ -82,9 +81,7 @@ class PlaceSelector extends StatelessWidget {
   }
 
   _navigateToPlace(Place generatedPlace) async {
-    String origin =
-        "901 Penninsula corp drive boca raton fl"; // lat,long like 123.34,68.56
-    // String destination="someEndLocationStringAddress or lat,long";
+    String origin = "901 Penninsula corp drive boca raton fl";
     String destination = '${generatedPlace.name}';
     if (LocalPlatform().isAndroid) {
       final AndroidIntent intent = new AndroidIntent(
