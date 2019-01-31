@@ -26,7 +26,11 @@ class PlaceDropDown extends StatelessWidget {
                   child: Text(p.name),
                   value: p,
                 );
-              }).toList(),
+              }).toList() ?? [
+                DropdownMenuItem(
+                  child: Text('No place found'),
+                ),
+              ],
               value: selected,
               onChanged: (Place value) {
                 bloc.selectPlace(value);
