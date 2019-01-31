@@ -1,6 +1,6 @@
-class Attendee {
+class AttendeeModel {
   final String name;
   final bool attending;
 
-  Attendee({this.name, this.attending});
+  AttendeeModel({this.name, this.attending});
 }

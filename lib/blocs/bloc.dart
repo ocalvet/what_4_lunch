@@ -35,19 +35,19 @@ class ApplicationBloc extends BlocBase {
   Stream<Duration> get nextMeeting$ => _nextMeetingSubject.stream;
   Sink<Duration> get _nextMeeting => _nextMeetingSubject.sink;
   // Attendees
-  BehaviorSubject<List<Attendee>> _attendeesSubject = BehaviorSubject<List<Attendee>>(seedValue: [
-    Attendee(name: "John", attending: true),
-    Attendee(name: "Jeff", attending: true),
-    Attendee(name: "Ovidio", attending: true),
-    Attendee(name: "Carlos", attending: true),
-    Attendee(name: "Faisal", attending: true),
-    Attendee(name: "Mike", attending: true),
-    Attendee(name: "Danny", attending: false),
-    Attendee(name: "Yohay", attending: false),
-    Attendee(name: "Steven", attending: false),
+  BehaviorSubject<List<AttendeeModel>> _attendeesSubject = BehaviorSubject<List<AttendeeModel>>(seedValue: [
+    AttendeeModel(name: "John", attending: true),
+    AttendeeModel(name: "Jeff", attending: true),
+    AttendeeModel(name: "Ovidio", attending: true),
+    AttendeeModel(name: "Carlos", attending: true),
+    AttendeeModel(name: "Faisal", attending: true),
+    AttendeeModel(name: "Mike", attending: true),
+    AttendeeModel(name: "Danny", attending: false),
+    AttendeeModel(name: "Yohay", attending: false),
+    AttendeeModel(name: "Steven", attending: false),
   ]);
-  Stream<List<Attendee>> get attendees$ => _attendeesSubject.stream;
-  Sink<List<Attendee>> get _attendees => _attendeesSubject.sink;
+  Stream<List<AttendeeModel>> get attendees$ => _attendeesSubject.stream;
+  Sink<List<AttendeeModel>> get _attendees => _attendeesSubject.sink;
 
   getRandomPlace() async {
     Place randomPlace = await _placeService.getRandomPlace();
@@ -69,8 +69,8 @@ class ApplicationBloc extends BlocBase {
     _weatherCondition.add(weather);
   }
 
-  updateAttendee(Attendee attendee) async {
-    List<Attendee> selectedAttendees = await _attendeesSubject.first;
+  updateAttendee(AttendeeModel attendee) async {
+    List<AttendeeModel> selectedAttendees = await _attendeesSubject.first;
     int index = selectedAttendees.indexWhere((a) => a.name == attendee.name);
     selectedAttendees.replaceRange(index, index + 1, [attendee]);
     _attendees.add(List.from(selectedAttendees));
@@ -88,7 +88,7 @@ class ApplicationBloc extends BlocBase {
     Place place = await _randomPlaceSubject.first;
     Weather weather = await _weatherSubject.first;
     Duration nextMeeting = await _nextMeetingSubject.first;
-    List<Attendee> attendees = await _attendeesSubject.first;
+    List<AttendeeModel> attendees = await _attendeesSubject.first;
     DateTime date = DateTime.now();
     Decision decision = Decision(
       place: place,

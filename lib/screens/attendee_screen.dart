@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:what_4_lunch/blocs/bloc.dart';
 import 'package:what_4_lunch/blocs/bloc_provider.dart';
 import 'package:what_4_lunch/models/attendee.dart';
+import 'package:what_4_lunch/widgets/attendee.dart';
 
 class AttendeeScreen extends StatelessWidget {
   @override
@@ -11,34 +12,16 @@ class AttendeeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Select Attendees'),
       ),
-      body: StreamBuilder<List<Attendee>>(
+      body: StreamBuilder<List<AttendeeModel>>(
         stream: bloc.attendees$,
         builder:
-            (BuildContext context, AsyncSnapshot<List<Attendee>> snapshot) {
-          List<Attendee> attendees = snapshot.hasData ? snapshot.data : [];
+            (BuildContext context, AsyncSnapshot<List<AttendeeModel>> snapshot) {
+          List<AttendeeModel> attendees = snapshot.hasData ? snapshot.data : [];
           print('Total Attendees ${attendees.length}');
           return ListView.builder(
             itemCount: attendees.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                onTap: null,
-                leading: CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.person_outline),
-                ),
-                title: Row(
-                  children: [
-                    Expanded(child: Text(attendees[index].name)),
-                    Checkbox(
-                      value: attendees[index].attending,
-                      onChanged: (bool value) => bloc.updateAttendee(Attendee(
-                            name: attendees[index].name,
-                            attending: value,
-                          )),
-                    ),
-                  ],
-                ),
-              );
+              return Attendee(attendee: attendees[index]);
             },
           );
         },

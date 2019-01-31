@@ -9,9 +9,9 @@ class AttendeeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     ApplicationBloc bloc = BlocProvider.of<ApplicationBloc>(context);
     return Container(
-      child: StreamBuilder<List<Attendee>>(
+      child: StreamBuilder<List<AttendeeModel>>(
         stream: bloc.attendees$,
-        builder: (BuildContext context, AsyncSnapshot<List<Attendee>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<AttendeeModel>> snapshot) {
           if (!snapshot.hasData) return Container();
           return Badge(
             positionTop: -7,
