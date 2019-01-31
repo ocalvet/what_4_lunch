@@ -82,7 +82,6 @@ class PlaceSelector extends StatelessWidget {
   }
 
   _navigateToPlace(Place generatedPlace) async {
-    print('One day we will open a map here with directions');
     String origin =
         "901 Penninsula corp drive boca raton fl"; // lat,long like 123.34,68.56
     // String destination="someEndLocationStringAddress or lat,long";

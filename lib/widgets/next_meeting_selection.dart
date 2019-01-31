@@ -27,7 +27,6 @@ class NextMeetingSelection extends StatelessWidget {
                   .toList(),
               value: snapshot.data.inMinutes.toString(),
               onChanged: (v) {
-                print('selecting $v');
                 bloc.updateNextMeeting(Duration(minutes: int.parse(v)));
               },
             ),

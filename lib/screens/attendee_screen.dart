@@ -17,7 +17,6 @@ class AttendeeScreen extends StatelessWidget {
         builder:
             (BuildContext context, AsyncSnapshot<List<AttendeeModel>> snapshot) {
           List<AttendeeModel> attendees = snapshot.hasData ? snapshot.data : [];
-          print('Total Attendees ${attendees.length}');
           return ListView.builder(
             itemCount: attendees.length,
             itemBuilder: (BuildContext context, int index) {

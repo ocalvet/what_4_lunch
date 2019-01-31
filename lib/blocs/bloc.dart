@@ -61,7 +61,6 @@ class ApplicationBloc extends BlocBase {
 
   updateWeatherConditions() async {
     Map<String, double> l = await location.getLocation();
-    print(l);
     Weather weather = await _weatherService.getByLatLon(Coord(
       lat: l["latitude"],
       lon: l["longitude"],
@@ -102,7 +101,6 @@ class ApplicationBloc extends BlocBase {
     try {
       await _decisionService.createDecision(decision);
     } catch (e) {
-      print(e);
       _decisionSubject.addError(e);
     }
   }
