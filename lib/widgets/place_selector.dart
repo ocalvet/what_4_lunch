@@ -23,7 +23,7 @@ class PlaceSelector extends StatelessWidget {
           widgets.add(Padding(
             padding: EdgeInsets.only(top: 10),
           ));
-          widgets.add(UpDown(generatedPlace: generatedPlace,));
+          widgets.add(UpDown(place: generatedPlace,));
         }
         return GestureDetector(
           child: Padding(

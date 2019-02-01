@@ -7,9 +7,9 @@ import 'package:what_4_lunch/blocs/bloc_provider.dart';
 import 'package:what_4_lunch/models/place.dart';
 
 class UpDown extends StatelessWidget {
-  final Place generatedPlace;
+  final Place place;
 
-  const UpDown({Key key, this.generatedPlace}) : super(key: key);
+  const UpDown({Key key, this.place}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class UpDown extends StatelessWidget {
           iconSize: 64,
           color: Colors.green,
           icon: Icon(Icons.thumb_up),
-          onPressed: () => _selectPlace(generatedPlace, context, bloc),
+          onPressed: () => _selectPlace(place, context, bloc),
         ),
         IconButton(
           iconSize: 64,
@@ -38,21 +38,21 @@ class UpDown extends StatelessWidget {
     bloc.getRandomPlace();
   }
 
-  _selectPlace(Place generatedPlace, BuildContext context, ApplicationBloc bloc) async {
+  _selectPlace(Place place, BuildContext context, ApplicationBloc bloc) async {
     bloc.makeDecision(true);
     final snackBar = SnackBar(
-      content: Text('Yes, we are going to ${generatedPlace.name}'),
+      content: Text('Yes, we are going to ${place.name}'),
       action: SnackBarAction(
         label: 'Map',
-        onPressed: () => _navigateToPlace(generatedPlace),
+        onPressed: () => _navigateToPlace(place),
       ),
     );
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  _navigateToPlace(Place generatedPlace) async {
+  _navigateToPlace(Place place) async {
     String origin = "901 Penninsula corp drive boca raton fl";
-    String destination = '${generatedPlace.name}';
+    String destination = '${place.name}';
     if (LocalPlatform().isAndroid) {
       final AndroidIntent intent = new AndroidIntent(
           action: 'action_view',
