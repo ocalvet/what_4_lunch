@@ -17,7 +17,10 @@ class PlaceService {
     List<Map<String, dynamic>> body = json.decode(response.body).cast<Map<String, dynamic>>();
     return body.map((Map<String, dynamic> jsonMap) {
       return Place.fromJson(jsonMap);
-    }).cast<Place>().toList();
+    }).cast<Place>()
+    .where((Place p) {
+      return p.name != null && p.imageUrl != null;
+    }).toList();
   }
 
   Place mapPlace(String jsonStr) {
