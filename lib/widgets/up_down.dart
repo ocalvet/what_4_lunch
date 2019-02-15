@@ -52,7 +52,7 @@ class UpDown extends StatelessWidget {
 
   _navigateToPlace(Place place) async {
     String origin = "901 Penninsula corp drive boca raton fl";
-    String destination = '${place.name}';
+    String destination = '${place?.name}';
     if (LocalPlatform().isAndroid) {
       final AndroidIntent intent = new AndroidIntent(
           action: 'action_view',

@@ -14,9 +14,9 @@ class PlaceSelector extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         Place generatedPlace = snapshot.data;
         String textToShow =
-            snapshot.hasData ? generatedPlace.name : 'Tab the screen';
+            snapshot.hasData ? generatedPlace?.name : 'Tab the screen';
         String textSecond =
-            snapshot.hasData ? generatedPlace.name : 'to generate a Place';
+            snapshot.hasData ? generatedPlace?.name : 'to generate a Place';
         List<Widget> widgets = <Widget>[BigText(text: textToShow)];
         if (textToShow != textSecond) {
           widgets.add(BigText(text: textSecond));
